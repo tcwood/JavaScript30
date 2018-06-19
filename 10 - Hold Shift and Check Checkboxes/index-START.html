@@ -99,6 +99,37 @@
   </div>
 
 <script>
+  let shiftIsDown = false;
+  const inputs = document.querySelectorAll('.inbox input[type="checkbox"]');
+  let lastChecked;
+  // add an event listener to see if shift is being held down or now
+  function handleClick(e) {
+    if (e.shiftKey && this.checked) {
+      let isInBetween = false;
+      inputs.forEach(input => {
+        
+        if (input === lastChecked || input === this) {
+          isInBetween = !isInBetween;
+        }
+        if (isInBetween) {
+          input.checked = true;
+        }
+        
+      })
+    }
+    lastChecked = this;
+  }
+
+  inputs.forEach((input, i) => {
+    input.addEventListener('click', handleClick);
+  })
+    // if it is
+      // record first element to be clicked on
+        // find index
+      // record second element to be clicked on
+        // find index
+      // iterate through all checkboxes and check ones that are between first and second index
+
 </script>
 </body>
 </html>
