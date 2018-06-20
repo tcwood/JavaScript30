@@ -7,6 +7,20 @@
 </head>
 <body>
 <script>
+  // abc
+  const code = `abc`
+  const codeRegex = new RegExp(code, `g`);
+  let currPresses = '';
+  function handleKeyPress(e) {
+    currPresses += e.key;
+    if (currPresses.length >= code.length) {
+      currPresses = currPresses.substring(currPresses.length - code.length) 
+    }
+    if (codeRegex.test(currPresses)) {
+      console.log('Its a match!');
+    }
+  }
+  window.addEventListener('keypress', handleKeyPress);
 </script>
 </body>
 </html>
