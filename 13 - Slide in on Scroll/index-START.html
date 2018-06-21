@@ -57,6 +57,33 @@
         if (callNow) func.apply(context, args);
       };
     }
+    const sliderImages = document.querySelectorAll('.slide-in');
+
+    function checkSlide(e) {
+      sliderImages.forEach((image, i) => {
+        // will give pixel level for where at at bottom
+        const bottomScreen = window.scrollY + window.innerHeight;
+        if (i === 0) {
+          console.log('window.scrollY in index-START.html:', window.scrollY);
+          console.log('window.innerHeight in index-START.html:', window.innerHeight);
+          console.log('image.height in index-START.html:', image.height);
+          console.log('image.offsetTop in index-START.html:', image.offsetTop);
+        }
+        const halfImageHeight = image.height / 2;
+        const slideInAt = bottomScreen - halfImageHeight;
+        const imageBottom = image.offsetTop + image.height;
+        const isHalfShown = slideInAt > image.offsetTop;
+        const isNotScrolledPast = window.scrollY < imageBottom;
+        if (isHalfShown && isNotScrolledPast) {
+          image.classList.add('active');
+        } else {
+          image.classList.remove('active');
+          
+        }
+
+      })
+    }
+    document.addEventListener('scroll', debounce(checkSlide));
 
   </script>
 
